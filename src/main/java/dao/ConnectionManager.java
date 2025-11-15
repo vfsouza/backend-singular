@@ -1,65 +1,66 @@
 package dao;
 
 import java.sql.*;
+import java.net.URI;
 
 public class ConnectionManager {
-	
-	 public static Connection getConnection() {
-	    Connection conexao = null;
-	    
-	    try {
-            String databaseUrl = System.getenv("DATABASE_URL");
 
-            System.out.println("========================================");
-            System.out.println("🔍 INICIANDO CONEXÃO COM BANCO");
-            System.out.println("========================================");
-            System.out.println("1️⃣ URL ORIGINAL: " + databaseUrl);
+    public static Connection getConnection() {
+        Connection conexao = null;
+
+        try {
+            String databaseUrl = System.getenv("BACK_DATABASE_URL");
 
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
-                System.out.println("2️⃣ Variável encontrada!");
-                System.out.println("3️⃣ Começa com 'jdbc:'? " + databaseUrl.startsWith("jdbc:"));
+                System.out.println("🔗 Conectando ao banco de produção...");
+                System.out.println("📌 URL original: " + databaseUrl.substring(0, 30) + "...");
 
-                // Adicionar jdbc: se não tiver
-                if (!databaseUrl.startsWith("jdbc:")) {
-                    System.out.println("4️⃣ Adicionando 'jdbc:' no início...");
-                    databaseUrl = "jdbc:" + databaseUrl;
-                    System.out.println("5️⃣ URL após adicionar jdbc: " + databaseUrl);
-                }
+                // ✅ Parsear a URL do Railway
+                URI dbUri = new URI(databaseUrl);
 
-                System.out.println("6️⃣ URL FINAL antes do getConnection: " + databaseUrl);
-                System.out.println("7️⃣ Carregando driver PostgreSQL...");
+                String username = dbUri.getUserInfo().split(":")[0];
+                String password = dbUri.getUserInfo().split(":")[1];
+                String host = dbUri.getHost();
+                int port = dbUri.getPort();
+                String database = dbUri.getPath().substring(1); // Remove a barra inicial
+
+                // Construir URL JDBC correta
+                String jdbcUrl = String.format(
+                        "jdbc:postgresql://%s:%d/%s",
+                        host, port, database
+                );
+
+                System.out.println("📌 Host: " + host);
+                System.out.println("📌 Port: " + port);
+                System.out.println("📌 Database: " + database);
+                System.out.println("📌 User: " + username);
+                System.out.println("📌 JDBC URL: " + jdbcUrl);
 
                 Class.forName("org.postgresql.Driver");
-
-                System.out.println("8️⃣ Driver carregado! Tentando conectar...");
-
-                conexao = DriverManager.getConnection(databaseUrl);
+                conexao = DriverManager.getConnection(jdbcUrl, username, password);
 
                 System.out.println("========================================");
-                System.out.println("✅✅✅ SUCESSO! CONECTADO AO BANCO! ✅✅✅");
+                System.out.println("✅✅✅ CONECTADO AO BANCO! ✅✅✅");
                 System.out.println("========================================");
 
             } else {
-                // Ambiente local (desenvolvimento)
                 System.out.println("🔗 Conectando ao banco local...");
 
                 String url = "jdbc:postgresql://localhost:5432/singular";
                 String usuario = "postgres";
-                String senha = "postgres"; // ← Ajuste sua senha local
+                String senha = "postgres";
 
                 Class.forName("org.postgresql.Driver");
                 conexao = DriverManager.getConnection(url, usuario, senha);
 
                 System.out.println("✅ Conectado ao banco local!");
             }
-	    } catch (ClassNotFoundException ex) {
-	        System.out.println("❌ Driver não encontrado: " + ex.getMessage());
-	        ex.printStackTrace();
-	    } catch (SQLException ex) {
-	        System.out.println("❌ Erro ao conectar: " + ex.getMessage());
-	        ex.printStackTrace();
-	    }
-	    
-	    return conexao;
-	}
+
+        } catch (Exception ex) {
+            System.err.println("❌ ERRO: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return conexao;
+    }
 }
