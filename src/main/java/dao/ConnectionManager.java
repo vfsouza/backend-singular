@@ -9,20 +9,35 @@ public class ConnectionManager {
 	    
 	    try {
             String databaseUrl = System.getenv("DATABASE_URL");
-            System.out.println(databaseUrl);
+
+            System.out.println("========================================");
+            System.out.println("🔍 INICIANDO CONEXÃO COM BANCO");
+            System.out.println("========================================");
+            System.out.println("1️⃣ URL ORIGINAL: " + databaseUrl);
+
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
-                // Ambiente de produção (Railway)
-                System.out.println("🔗 Conectando ao banco de produção...");
+                System.out.println("2️⃣ Variável encontrada!");
+                System.out.println("3️⃣ Começa com 'jdbc:'? " + databaseUrl.startsWith("jdbc:"));
+
+                // Adicionar jdbc: se não tiver
                 if (!databaseUrl.startsWith("jdbc:")) {
+                    System.out.println("4️⃣ Adicionando 'jdbc:' no início...");
                     databaseUrl = "jdbc:" + databaseUrl;
+                    System.out.println("5️⃣ URL após adicionar jdbc: " + databaseUrl);
                 }
 
-                databaseUrl = databaseUrl.replace("postgres://", "jdbc:postgresql://");
+                System.out.println("6️⃣ URL FINAL antes do getConnection: " + databaseUrl);
+                System.out.println("7️⃣ Carregando driver PostgreSQL...");
 
                 Class.forName("org.postgresql.Driver");
+
+                System.out.println("8️⃣ Driver carregado! Tentando conectar...");
+
                 conexao = DriverManager.getConnection(databaseUrl);
 
-                System.out.println("✅ Conectado ao banco de produção!");
+                System.out.println("========================================");
+                System.out.println("✅✅✅ SUCESSO! CONECTADO AO BANCO! ✅✅✅");
+                System.out.println("========================================");
 
             } else {
                 // Ambiente local (desenvolvimento)
