@@ -16,6 +16,7 @@ public class ConnectionManager {
 	    
 	    try {
             String databaseUrl = System.getenv("BACK_DATABASE_URL");
+            System.out.println(databaseUrl);
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
                 // Ambiente de produção (Railway)
                 System.out.println("🔗 Conectando ao banco de produção...");
