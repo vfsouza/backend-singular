@@ -13,4 +13,4 @@ RUN mvn clean compile dependency:copy-dependencies -DoutputDirectory=target/lib
 EXPOSE 8080
 
 # Rodar aplicação
-CMD ["java", "-cp", "target/classes:target/lib/*", "Principal"]
+CMD ["java", "-cp", "target/classes:target/lib/*", "app.Principal"]
