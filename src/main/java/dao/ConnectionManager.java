@@ -3,19 +3,12 @@ package dao;
 import java.sql.*;
 
 public class ConnectionManager {
-	private static final String DRIVER = "org.postgresql.Driver";
-	private static final String SERVER = "localhost";
-	private static final String DATABASE = "singular";
-	private static final int PORT = 5432;
-	private static final String URL = "jdbc:postgresql://" + SERVER + ":" + PORT + "/" + DATABASE;
-	private static final String USERNAME = "postgres";
-	private static final String PASSWORD = "679165";
 	
 	 public static Connection getConnection() {
 	    Connection conexao = null;
 	    
 	    try {
-            String databaseUrl = System.getenv("BACK_DATABASE_URL");
+            String databaseUrl = System.getenv("DATABASE_URL");
             System.out.println(databaseUrl);
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
                 // Ambiente de produção (Railway)
