@@ -13,9 +13,10 @@ public class ConnectionManager {
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
                 // Ambiente de produção (Railway)
                 System.out.println("🔗 Conectando ao banco de produção...");
+                if (!databaseUrl.startsWith("jdbc:")) {
+                    databaseUrl = "jdbc:" + databaseUrl;
+                }
 
-                // Railway usa formato: postgres://user:pass@host:port/db
-                // JDBC precisa: postgresql://user:pass@host:port/db
                 databaseUrl = databaseUrl.replace("postgres://", "jdbc:postgresql://");
 
                 Class.forName("org.postgresql.Driver");
