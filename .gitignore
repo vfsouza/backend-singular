@@ -1,0 +1,7 @@
+.idea
+.settings
+/src/main/resources
+/src/test
+target
+.classpath
+.project
