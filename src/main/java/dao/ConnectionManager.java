@@ -9,7 +9,7 @@ public class ConnectionManager {
         Connection conexao = null;
 
         try {
-            String databaseUrl = System.getenv("BACK_DATABASE_URL");
+            String databaseUrl = System.getenv("DATABASE_URL");
 
             if (databaseUrl != null && !databaseUrl.isEmpty()) {
                 System.out.println("🔗 Conectando ao banco de produção...");
