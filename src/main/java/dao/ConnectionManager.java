@@ -15,9 +15,33 @@ public class ConnectionManager {
 	    Connection conexao = null;
 	    
 	    try {
-	        Class.forName(DRIVER);
-	        conexao = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-	        System.out.println("✅ Conexão estabelecida com sucesso!");
+            String databaseUrl = System.getenv("BACK_DATABASE_URL");
+            if (databaseUrl != null && !databaseUrl.isEmpty()) {
+                // Ambiente de produção (Railway)
+                System.out.println("🔗 Conectando ao banco de produção...");
+
+                // Railway usa formato: postgres://user:pass@host:port/db
+                // JDBC precisa: postgresql://user:pass@host:port/db
+                databaseUrl = databaseUrl.replace("postgres://", "jdbc:postgresql://");
+
+                Class.forName("org.postgresql.Driver");
+                conexao = DriverManager.getConnection(databaseUrl);
+
+                System.out.println("✅ Conectado ao banco de produção!");
+
+            } else {
+                // Ambiente local (desenvolvimento)
+                System.out.println("🔗 Conectando ao banco local...");
+
+                String url = "jdbc:postgresql://localhost:5432/singular";
+                String usuario = "postgres";
+                String senha = "postgres"; // ← Ajuste sua senha local
+
+                Class.forName("org.postgresql.Driver");
+                conexao = DriverManager.getConnection(url, usuario, senha);
+
+                System.out.println("✅ Conectado ao banco local!");
+            }
 	    } catch (ClassNotFoundException ex) {
 	        System.out.println("❌ Driver não encontrado: " + ex.getMessage());
 	        ex.printStackTrace();
@@ -27,16 +51,5 @@ public class ConnectionManager {
 	    }
 	    
 	    return conexao;
-	}
-	
-	public static void closeConnection(Connection conn) {
-	    if (conn != null) {
-	        try {
-	            conn.close();
-	            System.out.println("✅ Conexão fechada");
-	        } catch (SQLException ex) {
-	            System.out.println("❌ Erro ao fechar conexão: " + ex.getMessage());
-	        }
-	    }
 	}
 }
