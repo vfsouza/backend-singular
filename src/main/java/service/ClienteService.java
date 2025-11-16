@@ -2,8 +2,12 @@ package service;
 
 import com.google.gson.Gson;
 import dao.ClienteDAO;
+import dao.EnderecoDAO;
 import interfaces.IService;
 import model.Cliente;
+import model.DTO.ClienteDTO;
+import model.DTO.EnderecoDTO;
+import model.Endereco;
 import spark.Request;
 import spark.Response;
 
@@ -12,6 +16,7 @@ import java.util.List;
 public class ClienteService implements IService {
     private static Gson gson = new Gson();
     private static ClienteDAO clienteDAO = new ClienteDAO();
+    private static EnderecoDAO enderecoDAO = new EnderecoDAO();
 
     @Override
     public String getAll(Request request, Response response) {
@@ -38,10 +43,23 @@ public class ClienteService implements IService {
     public String create(Request request, Response response) {
         response.type("application/json");
 
-        Cliente novoCliente = gson.fromJson(request.body(), Cliente.class);
-        Cliente clienteInserido = clienteDAO.inserir(novoCliente);
+        ClienteDTO novoCliente = gson.fromJson(request.body(), ClienteDTO.class);
+        Cliente inserirCliente = new Cliente(novoCliente.getNome(), novoCliente.getEmail(), novoCliente.getSenha());
+        Cliente clienteInserido = clienteDAO.inserir(inserirCliente);
 
-        if (clienteInserido != null) {
+        EnderecoDTO novoEndereco = novoCliente.getEndereco();
+        Endereco inserirEndereco = new Endereco();
+        inserirEndereco.setIdCliente(clienteInserido.getId());
+        inserirEndereco.setCep(novoEndereco.getCep());
+        inserirEndereco.setRua(novoEndereco.getRua());
+        inserirEndereco.setNumero(novoEndereco.getNumero());
+        inserirEndereco.setComplemento(novoEndereco.getComplemento());
+        inserirEndereco.setCidade(novoEndereco.getCidade());
+        inserirEndereco.setEstado(novoEndereco.getEstado());
+
+        Endereco enderecoInserido = enderecoDAO.inserir(inserirEndereco);
+
+        if (clienteInserido != null && enderecoInserido != null) {
             response.status(201);
             return gson.toJson(clienteInserido);
         } else {
