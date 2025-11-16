@@ -5,14 +5,14 @@ import java.util.List;
 
 public class CompraDTO {
     private int clienteId;
-    private int valorTotal;
+    private double valorTotal;
     private Timestamp dataCriacao;
     private List<CompraItemDTO> compraItemList;
 
     public CompraDTO() {
     }
 
-    public CompraDTO(int clienteId, int valorTotal, Timestamp dataCriacao, List<CompraItemDTO> compraItemList) {
+    public CompraDTO(int clienteId, double valorTotal, Timestamp dataCriacao, List<CompraItemDTO> compraItemList) {
         this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.dataCriacao = dataCriacao;
@@ -27,11 +27,11 @@ public class CompraDTO {
         this.clienteId = clienteId;
     }
 
-    public int getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(int valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 

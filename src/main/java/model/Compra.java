@@ -8,20 +8,20 @@ public class Compra {
 	private int id;
     @Column(name = "idcliente")
 	private int clienteId;
-	private float valorTotal;
+	private double valorTotal;
     @Column(name = "datacriacao")
     private Timestamp dataCriacao;
 	
 	public Compra() {
 	}
 
-    public Compra(int clienteId, float valorTotal, Timestamp dataCriacao) {
+    public Compra(int clienteId, double valorTotal, Timestamp dataCriacao) {
         this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.dataCriacao = dataCriacao;
     }
 
-    public Compra(int id, int clienteId, float valorTotal) {
+    public Compra(int id, int clienteId, double valorTotal) {
 		this.id = id;
 		this.clienteId = clienteId;
 		this.valorTotal = valorTotal;
@@ -43,11 +43,11 @@ public class Compra {
 		this.clienteId = clienteId;
 	}
 
-	public float getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(float valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	
