@@ -10,11 +10,12 @@ public class Produto {
 	private String cor;
 	private String tipo;
     private String imagemUri;
+    private int estoque;
 
 	public Produto() {
 	}
 
-	public Produto(int id, int categoriaId, BigDecimal valor, String nome, String cor, String tipo, String imagemUri) {
+	public Produto(int id, int categoriaId, BigDecimal valor, String nome, String cor, String tipo, String imagemUri, int estoque) {
 		this.id = id;
         this.categoriaId = categoriaId;
 		this.preco = valor;
@@ -22,6 +23,7 @@ public class Produto {
 		this.cor = cor;
 		this.tipo = tipo;
         this.imagemUri = imagemUri;
+        this.estoque = estoque;
 	}
 
 	public int getId() {
@@ -78,5 +80,13 @@ public class Produto {
 
     public void setImagemUri(String imagemUri) {
         this.imagemUri = imagemUri;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
     }
 }

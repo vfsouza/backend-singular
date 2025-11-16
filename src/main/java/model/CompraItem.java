@@ -9,14 +9,14 @@ public class CompraItem {
 	@Column(name = "produtoid")
 	private int produtoId;
 	private int quantidade;
-	private float subtotal;
+	private double subtotal;
 	@Column(name = "precounit")
-	private float precoUnit;
+	private double precoUnit;
 	
 	public CompraItem() {
 	}
 	
-	public CompraItem(int id, int compraId, int produtoId, int quantidade, float subtotal, float precoUnit) {
+	public CompraItem(int id, int compraId, int produtoId, int quantidade, double subtotal, double precoUnit) {
 		super();
 		this.id = id;
 		this.compraId = compraId;
@@ -58,19 +58,19 @@ public class CompraItem {
 		this.quantidade = quantidade;
 	}
 
-	public float getSubtotal() {
+	public double getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(float subtotal) {
+	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public float getPrecoUnit() {
+	public double getPrecoUnit() {
 		return precoUnit;
 	}
 
-	public void setPrecoUnit(float precoUnit) {
+	public void setPrecoUnit(double precoUnit) {
 		this.precoUnit = precoUnit;
 	}
 }
