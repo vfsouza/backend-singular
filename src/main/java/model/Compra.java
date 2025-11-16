@@ -10,7 +10,7 @@ public class Compra {
 	private int clienteId;
 	private double valorTotal;
     @Column(name = "datacriacao")
-    private Timestamp dataCriacao;
+    private Timestamp dataCriacao = new Timestamp(System.currentTimeMillis());
 	
 	public Compra() {
 	}
