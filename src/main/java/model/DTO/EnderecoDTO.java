@@ -7,17 +7,19 @@ public class EnderecoDTO {
     private String complemento;
     private String cidade;
     private String estado;
+    private String pais;
 
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(String cep, String rua, String numero, String complemento, String cidade, String estado) {
+    public EnderecoDTO(String cep, String rua, String numero, String complemento, String cidade, String estado, String pais) {
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
         this.complemento = complemento;
         this.cidade = cidade;
         this.estado = estado;
+        this.pais = pais;
     }
 
     public String getCep() {
@@ -66,5 +68,13 @@ public class EnderecoDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 }

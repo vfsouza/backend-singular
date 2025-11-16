@@ -56,6 +56,7 @@ public class ClienteService implements IService {
         inserirEndereco.setComplemento(novoEndereco.getComplemento());
         inserirEndereco.setCidade(novoEndereco.getCidade());
         inserirEndereco.setEstado(novoEndereco.getEstado());
+        inserirEndereco.setPais(novoEndereco.getPais());
 
         Endereco enderecoInserido = enderecoDAO.inserir(inserirEndereco);
 
