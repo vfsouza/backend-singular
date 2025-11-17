@@ -5,11 +5,9 @@ import dao.CompraDAO;
 import dao.CompraItemDAO;
 import dao.ProdutoDAO;
 import interfaces.IService;
-import model.CarrinhoItem;
 import model.Compra;
 import model.CompraItem;
 import model.DTO.CompraDTO;
-import model.DTO.CompraItemDTO;
 import model.Produto;
 import spark.Request;
 import spark.Response;
@@ -61,9 +59,9 @@ public class CompraService implements IService {
             carrinhoItem.setSubtotal(compraItemDTO.getQuantidade() * compraItemDTO.getPrecoUnitario());
             compraItemDAO.inserir(carrinhoItem);
 
-            Produto produto = produtoDAO.getById(compraItemDTO.getProdutoId());
+            Produto produto = produtoDAO.buscarPorId(compraItemDTO.getProdutoId());
             produto.setEstoque(produto.getEstoque() - compraItemDTO.getQuantidade());
-            produtoDAO.update(produto);
+            produtoDAO.atualizar(produto);
         });
 
         if (compraInserida != null) {

@@ -5,23 +5,23 @@ import java.util.List;
 import model.Produto;
 
 public class ProdutoDAO extends StatementManager {
-	public List<Produto> get() {
+	public List<Produto> listarTodos() {
         return selectAll(Produto.class);
     }
     
-    public Produto getById(int id) {
+    public Produto buscarPorId(int id) {
         return selectById(Produto.class, id);
     }
     
-    public Produto create(Produto produto) {
+    public Produto inserir(Produto produto) {
         return insert(produto);
     }
     
-    public boolean update(Produto produto) {
+    public boolean atualizar(Produto produto) {
         return update(produto);
     }
     
-    public boolean delete(int id) {
+    public boolean deletar(int id) {
         return delete(Produto.class, id);
     }
 }

@@ -16,7 +16,7 @@ public class ProdutoService implements IService {
     @Override
     public String getAll(Request request, Response response) {
         response.type("application/json");
-        List<Produto> produtos = produtoDAO.get();
+        List<Produto> produtos = produtoDAO.listarTodos();
         return gson.toJson(produtos);
     }
 
@@ -24,7 +24,7 @@ public class ProdutoService implements IService {
     public String getById(Request request, Response response) {
         response.type("application/json");
         int id = Integer.parseInt(request.params(":id"));
-        Produto produto = produtoDAO.getById(id);
+        Produto produto = produtoDAO.buscarPorId(id);
 
         if (produto != null) {
             return gson.toJson(produto);
@@ -39,7 +39,7 @@ public class ProdutoService implements IService {
         response.type("application/json");
 
         Produto novoProduto = gson.fromJson(request.body(), Produto.class);
-        Produto produtoInserido = produtoDAO.create(novoProduto);
+        Produto produtoInserido = produtoDAO.inserir(novoProduto);
 
         if (produtoInserido != null) {
             response.status(201);
@@ -58,7 +58,7 @@ public class ProdutoService implements IService {
         Produto produtoAtualizado = gson.fromJson(request.body(), Produto.class);
         produtoAtualizado.setId(id);
 
-        boolean sucesso = produtoDAO.update(produtoAtualizado);
+        boolean sucesso = produtoDAO.atualizar(produtoAtualizado);
 
         if (sucesso) {
             return gson.toJson(produtoAtualizado);
@@ -73,7 +73,7 @@ public class ProdutoService implements IService {
         response.type("application/json");
         int id = Integer.parseInt(request.params(":id"));
 
-        boolean sucesso = produtoDAO.delete(id);
+        boolean sucesso = produtoDAO.deletar(id);
 
         if (sucesso) {
             return "{ \"mensagem\": \"Produto deletado com sucesso\" }";
