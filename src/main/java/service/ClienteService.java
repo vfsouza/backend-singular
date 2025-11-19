@@ -44,7 +44,7 @@ public class ClienteService implements IService {
         response.type("application/json");
 
         ClienteDTO novoCliente = gson.fromJson(request.body(), ClienteDTO.class);
-        Cliente inserirCliente = new Cliente(novoCliente.getNome(), novoCliente.getEmail(), novoCliente.getSenha());
+        Cliente inserirCliente = new Cliente(novoCliente.getNome(), novoCliente.getEmail(), novoCliente.getSenha(), false);
         Cliente clienteInserido = clienteDAO.inserir(inserirCliente);
 
         EnderecoDTO novoEndereco = novoCliente.getEndereco();

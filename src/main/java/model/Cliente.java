@@ -5,14 +5,16 @@ public class Cliente {
 	private String nome;
 	private String email;
 	private String senha;
+    private boolean isAdmin;
 	
 	public Cliente() {
 	}
 	
-	public Cliente(String nome, String email, String senha) {
+	public Cliente(String nome, String email, String senha, boolean isAdmin) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+        this.isAdmin = isAdmin;
 	}
 
 	public int getId() {
@@ -46,4 +48,12 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+    public String getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(String isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 }
