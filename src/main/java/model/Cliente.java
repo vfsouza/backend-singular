@@ -49,11 +49,11 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-    public String getIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(String isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 }
