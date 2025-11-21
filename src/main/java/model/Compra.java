@@ -2,26 +2,27 @@ package model;
 
 import annotations.Column;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Compra {
 	private int id;
     @Column(name = "idcliente")
 	private int clienteId;
-	private double valorTotal;
+	private BigDecimal valorTotal;
     @Column(name = "datacriacao")
     private Timestamp dataCriacao = new Timestamp(System.currentTimeMillis());
 	
 	public Compra() {
 	}
 
-    public Compra(int clienteId, double valorTotal, Timestamp dataCriacao) {
+    public Compra(int clienteId, BigDecimal valorTotal, Timestamp dataCriacao) {
         this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.dataCriacao = dataCriacao;
     }
 
-    public Compra(int id, int clienteId, double valorTotal) {
+    public Compra(int id, int clienteId, BigDecimal valorTotal) {
 		this.id = id;
 		this.clienteId = clienteId;
 		this.valorTotal = valorTotal;
@@ -43,11 +44,11 @@ public class Compra {
 		this.clienteId = clienteId;
 	}
 
-	public double getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(double valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	

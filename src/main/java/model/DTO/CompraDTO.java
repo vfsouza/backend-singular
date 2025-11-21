@@ -1,18 +1,19 @@
 package model.DTO;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
 public class CompraDTO {
     private int clienteId;
-    private double valorTotal;
+    private BigDecimal valorTotal;
     private Timestamp dataCriacao;
     private List<CompraItemDTO> compraItemList;
 
     public CompraDTO() {
     }
 
-    public CompraDTO(int clienteId, double valorTotal, Timestamp dataCriacao, List<CompraItemDTO> compraItemList) {
+    public CompraDTO(int clienteId, BigDecimal valorTotal, Timestamp dataCriacao, List<CompraItemDTO> compraItemList) {
         this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.dataCriacao = dataCriacao;
@@ -27,11 +28,11 @@ public class CompraDTO {
         this.clienteId = clienteId;
     }
 
-    public double getValorTotal() {
+    public BigDecimal getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
+    public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
 

@@ -1,14 +1,16 @@
 package model.DTO;
 
+import java.math.BigDecimal;
+
 public class CompraItemDTO {
     private int produtoId;
     private int quantidade;
-    private double precoUnitario;
+    private BigDecimal precoUnitario;
 
     public CompraItemDTO() {
     }
 
-    public CompraItemDTO(int produtoId, int quantidade, double precoUnitario) {
+    public CompraItemDTO(int produtoId, int quantidade, BigDecimal precoUnitario) {
         this.produtoId = produtoId;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
@@ -30,11 +32,11 @@ public class CompraItemDTO {
         this.quantidade = quantidade;
     }
 
-    public double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(double precoUnitario) {
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 }

@@ -12,6 +12,7 @@ import model.Produto;
 import spark.Request;
 import spark.Response;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CompraService implements IService {
@@ -51,13 +52,13 @@ public class CompraService implements IService {
         List<Integer> produtosId = novaCompra.getCompraItemList().stream().map((item) -> item.getProdutoId()).toList();
 
         novaCompra.getCompraItemList().forEach(compraItemDTO -> {
-            CompraItem carrinhoItem = new CompraItem();
-            carrinhoItem.setCompraId(compraInserida.getId());
-            carrinhoItem.setProdutoId(compraItemDTO.getProdutoId());
-            carrinhoItem.setQuantidade(compraItemDTO.getQuantidade());
-            carrinhoItem.setPrecoUnit(compraItemDTO.getPrecoUnitario());
-            carrinhoItem.setSubtotal(compraItemDTO.getQuantidade() * compraItemDTO.getPrecoUnitario());
-            compraItemDAO.inserir(carrinhoItem);
+            CompraItem compraItem = new CompraItem();
+            compraItem.setCompraId(compraInserida.getId());
+            compraItem.setProdutoId(compraItemDTO.getProdutoId());
+            compraItem.setQuantidade(compraItemDTO.getQuantidade());
+            compraItem.setPrecoUnit(compraItemDTO.getPrecoUnitario());
+            compraItem.setSubtotal(BigDecimal.valueOf(compraItemDTO.getQuantidade()).multiply(compraItemDTO.getPrecoUnitario()));
+            compraItemDAO.inserir(compraItem);
 
             Produto produto = produtoDAO.buscarPorId(compraItemDTO.getProdutoId());
             produto.setEstoque(produto.getEstoque() - compraItemDTO.getQuantidade());

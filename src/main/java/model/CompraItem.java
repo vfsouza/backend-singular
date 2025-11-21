@@ -2,6 +2,8 @@ package model;
 
 import annotations.Column;
 
+import java.math.BigDecimal;
+
 public class CompraItem {
 	private int id;
 	@Column(name = "compraid")
@@ -9,14 +11,14 @@ public class CompraItem {
 	@Column(name = "produtoid")
 	private int produtoId;
 	private int quantidade;
-	private double subtotal;
+	private BigDecimal subtotal;
 	@Column(name = "precounit")
-	private double precoUnit;
+	private BigDecimal precoUnit;
 	
 	public CompraItem() {
 	}
 	
-	public CompraItem(int id, int compraId, int produtoId, int quantidade, double subtotal, double precoUnit) {
+	public CompraItem(int id, int compraId, int produtoId, int quantidade, BigDecimal subtotal, BigDecimal precoUnit) {
 		super();
 		this.id = id;
 		this.compraId = compraId;
@@ -58,19 +60,19 @@ public class CompraItem {
 		this.quantidade = quantidade;
 	}
 
-	public double getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(double subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public double getPrecoUnit() {
+	public BigDecimal getPrecoUnit() {
 		return precoUnit;
 	}
 
-	public void setPrecoUnit(double precoUnit) {
+	public void setPrecoUnit(BigDecimal precoUnit) {
 		this.precoUnit = precoUnit;
 	}
 }
